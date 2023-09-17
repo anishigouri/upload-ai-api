@@ -1,12 +1,12 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.prompt.deleteMany()
+  await prisma.prompt.deleteMany();
 
   await prisma.prompt.create({
     data: {
-      title: 'Título YouTube',
+      title: "Título YouTube",
       template: `Seu papel é gerar três títulos para um vídeo do YouTube.
 
 Abaixo você receberá uma transcrição desse vídeo, use essa transcrição para gerar os títulos.
@@ -25,14 +25,15 @@ Retorne APENAS os três títulos em formato de lista como no exemplo abaixo:
 Transcrição:
 '''
 {transcription}
-'''`.trim()
-    }
-  })
+'''`.trim(),
+    },
+  });
 
   await prisma.prompt.create({
     data: {
-      title: 'Descrição YouTube',
-      template: `Seu papel é gerar uma descrição sucinta para um vídeo do YouTube.
+      title: "Descrição YouTube",
+      template:
+        `Seu papel é gerar uma descrição sucinta para um vídeo do YouTube.
   
 Abaixo você receberá uma transcrição desse vídeo, use essa transcrição para gerar a descrição.
 
@@ -52,17 +53,17 @@ Descrição.
 Transcrição:
 '''
 {transcription}
-'''`.trim()
-    }
-  })
+'''`.trim(),
+    },
+  });
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
